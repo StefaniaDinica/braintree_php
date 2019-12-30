@@ -64,14 +64,13 @@ var processClientToken = function(response) {
   braintree.dropin.create(
     {
       authorization: response.token,
-      selector: "#bt-dropin"
-      //   paypal: {
-      //     flow: 'vault'
-      //   }
+      selector: "#bt-dropin",
+      paypal: {
+        flow: "vault"
+      }
     },
     processDropInCreation
-  );  
-}
+  );
+};
 
 $.get("clientToken.php", processClientToken, "json");
-
