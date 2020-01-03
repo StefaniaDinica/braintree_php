@@ -74,7 +74,6 @@ input[type=radio]:checked ~ label {
 
 input[type=number] {
   width: 300px;
-  margin: 20px 0px;
   padding: 6px 22px;
   border: 1px solid #cc0000;
   border-radius: 34px;
@@ -110,6 +109,17 @@ button[type=submit] {
 
 .hide {
   display: none;
+}
+
+.form-group {
+  margin: 20px 0px;
+}
+
+.input-error {
+  display: block;
+  margin-top: 10px;
+  color: #cc0000;
+  font-size: 14px;
 }
 
 .lds-default {

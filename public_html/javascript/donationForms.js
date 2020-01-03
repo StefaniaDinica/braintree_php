@@ -1,6 +1,7 @@
 $("#donation-result").hide();
 $("#form-payment").hide();
 $("#input-amount").hide();
+$("#input-amount span").hide();
 $(".text-amount").text(
   $("input[name='item-selector-amount']:checked").data("amount")
 );
@@ -32,7 +33,7 @@ $("#selector-amount-other").click(function() {
   $(".text-amount").text("0");
 });
 
-$("#input-amount").on("keyup", function() {
+$("#input-amount input").on("keyup", function() {
   if ($(this).val().length == 0) {
     $(".text-amount").text("0");
   } else {
@@ -42,6 +43,11 @@ $("#input-amount").on("keyup", function() {
 
 $("#form-selector").submit(function(event) {
   event.preventDefault();
-  $("#form-selector").hide();
-  $("#form-payment").show();
+  if ($(".text-amount").first().text() != "0") {
+    $("#input-amount span").hide();
+    $("#form-selector").hide();
+    $("#form-payment").show();
+  } else {
+    $("#input-amount span").show();
+  }
 });

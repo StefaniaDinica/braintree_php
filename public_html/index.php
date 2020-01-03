@@ -40,7 +40,10 @@
                     </li>
                 </ul>
 
-                <input id="input-amount" type="number" placeholder="€ Introduceți suma dorită în Euro" />
+                <div id="input-amount" class="form-group">
+                    <input type="number" placeholder="€ Introduceți suma dorită în Euro" />
+                    <span class="input-error">Te rugam sa introduci o suma valida</span>
+                </div>
 
                 <p>Total: <span class="text-amount">0</span>.00 €</p>
 
