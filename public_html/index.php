@@ -45,9 +45,14 @@
                     <span class="input-error">Te rugam sa introduci o suma valida</span>
                 </div>
 
+                <div id="input-email" class="form-group">
+                    <input type="text" placeholder="Introduceți email-ul" />
+                    <span class="input-error">Te rugam sa introduci un email valid</span>
+                </div>
+
                 <p>Total: <span class="text-amount">0</span>.00 €</p>
 
-                <button type="submit">Doneaza <span class="text-amount">0</span>.00 € / luna</button>
+                <button type="submit">Doneaza <span class="text-amount">0</span>.00 € <span id="frequency">/ luna</span></button>
             </form>
 
             <form id="form-payment">

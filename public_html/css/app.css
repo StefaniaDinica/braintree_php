@@ -72,7 +72,7 @@ input[type=radio]:checked ~ label {
   font-weight: 700;
 }
 
-input[type=number] {
+input[type=number], input[type=text] {
   width: 300px;
   padding: 6px 22px;
   border: 1px solid #cc0000;

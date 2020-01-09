@@ -20,3 +20,4 @@ $gateway = new Braintree\Gateway([
 $baseUrl = stripslashes(dirname($_SERVER['SCRIPT_NAME']));
 $baseUrl = $baseUrl == '/' ? $baseUrl : $baseUrl . '/';
 $planId = getenv('BT_PLAN_ID');
+$baseUrl = getenv('BASE_URL');

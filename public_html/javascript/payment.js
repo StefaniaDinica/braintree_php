@@ -3,8 +3,8 @@ var processPaymentResponse = function(response) {
   if (response.success == true) {
     $("#donation-result").text("Tranzactia a fost procesata cu succes.");
   } else {
-    errors = response.errorString ? response.errorString : "";
-    $("#donation-result").text("Tranzactia nu a putut fi procesata. " + errors);
+    $("#donation-result").text("Tranzactia nu a putut fi procesata.");
+    console.log(response.errorString);
   }
   $("#loader-payment").hide();
   $("#donation-result").show();
@@ -35,6 +35,7 @@ var processDropInCreation = function(createErr, instance) {
             amount: $(".text-amount")
               .first()
               .text(),
+            email: $("#input-email input").val(),
             payment_method_nonce: payload.nonce
           },
           processPaymentResponse,
@@ -47,6 +48,7 @@ var processDropInCreation = function(createErr, instance) {
             amount: $(".text-amount")
               .first()
               .text(),
+            email: $("#input-email input").val(),
             payment_method_nonce: payload.nonce
           },
           processPaymentResponse,
@@ -60,7 +62,6 @@ var processDropInCreation = function(createErr, instance) {
 };
 
 var processClientToken = function(response) {
-  console.log(response);
   braintree.dropin.create(
     {
       authorization: response.token,
