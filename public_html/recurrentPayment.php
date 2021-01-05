@@ -4,35 +4,15 @@ require_once("email.php");
 
 $amount = $_POST["amount"];
 $clientEmail = $_POST["email"];
-$nonce = $_POST["payment_method_nonce"];
+$upgradedNonce = $_POST["payment_method_nonce"];
 $errorString = "";
 
-$resultCreateCustomer = $gateway->customer()->create([
-    'email' => $clientEmail,
-    'paymentMethodNonce' => $nonce
+$resultCreateSubscription = $gateway->subscription()->create([
+    'paymentMethodNonce' => $upgradedNonce,
+    'planId' => $planId,
+    'price' => $amount
 ]);
-
-if (!$resultCreateCustomer->success) {
-    foreach($resultCreateCustomer->errors->deepAll() as $error) {
-        $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
-    }
-
-    error_log("Customer could not be created. " + $errorString);
-
-    echo json_encode([
-        'success' => false,
-        'errorString' => $errorString
-    ]);
-
-    return;
-} else {
-    $resultCreateSubscription = $gateway->subscription()->create([
-        'paymentMethodToken' => $resultCreateCustomer->customer->paymentMethods[0]->token,
-        'planId' => $planId,
-        'price' => $amount
-    ]);
-}
-
+  
 header('Content-type: application/json');
 
 if (!$resultCreateSubscription->success) {
@@ -40,7 +20,7 @@ if (!$resultCreateSubscription->success) {
         $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
     }
 
-    error_log("Subscription could not be created. " + $errorString);
+    // error_log("Subscription could not be created. " + $errorString);
 
     echo json_encode([
         'success' => false,
@@ -54,7 +34,7 @@ if (!$resultCreateSubscription->success) {
 
     $emailSent = true;
     if ($numEmailsSent == 0) {
-        error_log("Email could not be sent. ");
+        // error_log("Email could not be sent. ");
 
         $emailSent = false;
     }
