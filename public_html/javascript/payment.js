@@ -1,4 +1,5 @@
 var threeDSecure;
+var bin;
 
 var processPaymentResponse = function(response) {
   $("#donation-forms").hide();
@@ -16,6 +17,7 @@ var processNonceFromTokenResponse = function(response) {
   threeDSecure.verifyCard({
     amount: $(".text-amount").first().text(),
     nonce: response.nonce,
+    bin: bin
     // challengeRequested: true
   }, function (err, res) {
     if (err) {
@@ -70,6 +72,8 @@ var processDropInCreation = function(createErr, instance) {
           $("#donation-result").show();
           return;
         }
+
+        bin = payload.details.bin;
 
         if ($("#selector-plan-monthly").is(":checked")) {
           $.post(
