@@ -20,14 +20,12 @@ var processNonceFromTokenResponse = function(response) {
     bin: bin
     // challengeRequested: true
   }, function (err, res) {
-    if (err) {
-      console.log(err);
-      return;
-    }
     // Send response.nonce to your server for use in your integration
     if (err) {
+      console.log(err);
       $("#form-payment").hide();
       $("#donation-result").text("Tranzactia nu a putut fi procesata.");
+      $("#loader-payment").hide();
       $("#donation-result").show();
       return;
     }
@@ -50,8 +48,14 @@ var processNonceFromTokenResponse = function(response) {
 var processDropInCreation = function(createErr, instance) {
   if (createErr) {
     console.log("Create Error", createErr);
+    $("#donation-result").text("Momentan nu pot fi efectuate plati.");
+    $("#loader-payment").hide();
+    $("#donation-result").show();
     return;
   }
+
+  $("#loader-payment").hide();
+  $("#form-payment").show();
 
   $("#loader-dropin").hide();
   $("#button-dropin").show();
@@ -94,7 +98,6 @@ var processDropInCreation = function(createErr, instance) {
                 .text(),
               email: $("#input-email input").val(),
               payment_method_nonce: payload.nonce,
-              // device_data: $("input[name='device_data']").val()
             },
             processPaymentResponse,
             "json"
@@ -108,17 +111,56 @@ var processDropInCreation = function(createErr, instance) {
 };
 
 var processClientToken = function(response) {
-  braintree.dropin.create(
-    {
-      authorization: response.token,
-      selector: "#bt-dropin",
-      paypal: {
-        flow: "vault"
-      },
-      threeDSecure: true
-    },
-    processDropInCreation
-  );
+  $("#form-selector").submit(function(event) {
+    event.preventDefault();
+  
+    var emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var errors = false;
+    
+    if (emailReg.test($("#input-email input").val())) {
+      $("#input-email .input-error").hide();
+    } else {
+      $("#input-email .input-error").show();
+      errors = true;
+    }
+  
+    if ($(".text-amount").first().text() != "0") {
+      $("#input-amount .input-error").hide();
+    } else {
+      $("#input-amount .input-error").show();
+      errors = true;
+    }
+  
+    if (!errors) {
+      $("#form-selector").hide();
+      $("#loader-payment").show();
+
+      if ($("#selector-plan-monthly").is(":checked")) {
+        braintree.dropin.create(
+          {
+            authorization: response.token,
+            selector: "#bt-dropin-recurr",
+            paypal: {
+              flow: "vault"
+            }
+          },
+          processDropInCreation
+        );
+      } else if ($("#selector-plan-once").is(":checked")) {
+        braintree.dropin.create(
+            {
+              authorization: response.token,
+              selector: "#bt-dropin-simple",
+              paypal: {
+                flow: "vault"
+              },
+              threeDSecure: true
+            },
+            processDropInCreation
+          );
+      }
+    }
+  });
 
   braintree.client.create({
     authorization: response.token
@@ -141,24 +183,6 @@ var processClientToken = function(response) {
   
       threeDSecure = threeDSecureInstance;
     });
-
-    // braintree.dataCollector.create({
-    //   client: clientInstance
-    // }, function (err, dataCollectorInstance) {
-    //   if (err) {
-    //     console.log("Error create data collector")
-    //     return;
-    //   }
-    //   // At this point, you should access the dataCollectorInstance.deviceData value and provide it
-    //   // to your server, e.g. by injecting it into your form as a hidden input.
-    //   var form = document.getElementById('form-payment');
-    //   var deviceDataInput = document.createElement('input');
-    //   deviceDataInput.name = 'device_data';
-    //   deviceDataInput.type = 'hidden';
-    //   form.appendChild(deviceDataInput);
-
-    //   deviceDataInput.value = dataCollectorInstance.deviceData;
-    // });
   });
 };
 

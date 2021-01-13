@@ -63,8 +63,9 @@
                     <div></div><div></div><div></div>
                 </div>
 
-                <div class="bt-drop-in-wrapper">
-                    <div id="bt-dropin"></div>
+                <div id="bt-dropin-wrapper" class="bt-drop-in-wrapper">
+                    <div id="bt-dropin-simple"></div>
+                    <div id="bt-dropin-recurr"></div>
                     <button id="button-dropin" class="hide" type="submit"><span>Plateste</span></button>
                 </div>
             </form>
