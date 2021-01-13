@@ -45,29 +45,3 @@ $("#input-amount input").on("keyup", function() {
     $(".text-amount").text($(this).val());
   }
 });
-
-$("#form-selector").submit(function(event) {
-  event.preventDefault();
-
-  var emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  var errors = false;
-  
-  if (emailReg.test($("#input-email input").val())) {
-    $("#input-email .input-error").hide();
-  } else {
-    $("#input-email .input-error").show();
-    errors = true;
-  }
-
-  if ($(".text-amount").first().text() != "0") {
-    $("#input-amount .input-error").hide();
-  } else {
-    $("#input-amount .input-error").show();
-    errors = true;
-  }
-
-  if (!errors) {
-    $("#form-selector").hide();
-    $("#form-payment").show();
-  }
-});

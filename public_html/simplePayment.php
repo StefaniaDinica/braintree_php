@@ -4,6 +4,7 @@ require_once("../includes/braintree_init.php");
 $amount = $_POST["amount"];
 $nonce = $_POST["payment_method_nonce"];
 $email = $_POST["email"];
+// $deviceData = $_POST["device_data"];
 
 $result = $gateway->transaction()->sale([
     'amount' => $amount,
@@ -14,6 +15,7 @@ $result = $gateway->transaction()->sale([
     'customer' => [
         'email' => $email
     ],
+    // 'deviceData' => $deviceData
 ]);
 
 if (!$result->success) {
@@ -22,8 +24,6 @@ if (!$result->success) {
     foreach($result->errors->deepAll() as $error) {
         $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
     }
-
-    error_log("Transaction could not be created. " + $errorString);
 
     echo json_encode([
         'success' => false,

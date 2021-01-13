@@ -63,8 +63,9 @@
                     <div></div><div></div><div></div>
                 </div>
 
-                <div class="bt-drop-in-wrapper">
-                    <div id="bt-dropin"></div>
+                <div id="bt-dropin-wrapper" class="bt-drop-in-wrapper">
+                    <div id="bt-dropin-simple"></div>
+                    <div id="bt-dropin-recurr"></div>
                     <button id="button-dropin" class="hide" type="submit"><span>Plateste</span></button>
                 </div>
             </form>
@@ -79,7 +80,14 @@
         </div> 
     </div>
 
-    <script src="https://js.braintreegateway.com/web/dropin/1.21.0/js/dropin.min.js"></script>
+    <!-- Load the Drop-in component -->
+    <script src='https://js.braintreegateway.com/web/dropin/1.25.0/js/dropin.min.js'></script>
+    <script src="https://js.braintreegateway.com/web/3.70.0/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.70.0/js/data-collector.min.js"></script>
+    <!-- Load the 3D Secure component. -->
+    <script src='https://js.braintreegateway.com/web/3.70.0/js/three-d-secure.min.js'></script>
+    <!-- Load the Hosted Fields component. -->
+    <script src='https://js.braintreegateway.com/web/3.70.0/js/hosted-fields.min.js'></script>
     <script src="javascript/jquery.min.js"></script>
     <script src="javascript/donationForms.js"></script>
     <script src="javascript/payment.js"></script>
