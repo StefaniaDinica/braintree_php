@@ -52,6 +52,11 @@
 
                 <p>Total: <span class="text-amount">0</span>.00 €</p>
 
+                <div id="recaptcha" class="form-group">
+                    <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                    <span class="input-error">Te rugăm să validezi casuta</span>
+                </div>
+
                 <button type="submit">Doneaza <span class="text-amount">0</span>.00 € <span id="frequency">/ luna</span></button>
             </form>
 
@@ -88,6 +93,8 @@
     <script src='https://js.braintreegateway.com/web/3.70.0/js/three-d-secure.min.js'></script>
     <!-- Load the Hosted Fields component. -->
     <script src='https://js.braintreegateway.com/web/3.70.0/js/hosted-fields.min.js'></script>
+    <!-- Captcha -->
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
     <script src="javascript/jquery.min.js"></script>
     <script src="javascript/donationForms.js"></script>
     <script src="javascript/payment.js"></script>

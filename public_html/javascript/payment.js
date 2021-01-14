@@ -130,6 +130,14 @@ var processClientToken = function(response) {
       $("#input-amount .input-error").show();
       errors = true;
     }
+
+    var captchaResponse = grecaptcha.getResponse();
+    if (captchaResponse.length == 0) {
+      errors = true;
+      $("#recaptcha .input-error").show();
+    } else {
+      $("#recaptcha .input-error").hide();
+    }
   
     if (!errors) {
       $("#form-selector").hide();
