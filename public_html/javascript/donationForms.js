@@ -3,6 +3,7 @@ $("#form-payment").hide();
 $("#input-amount").hide();
 $("#input-amount span").hide();
 $("#input-email span").hide();
+$("#recaptcha span").hide();
 $(".text-amount").text(
   $("input[name='item-selector-amount']:checked").data("amount")
 );
