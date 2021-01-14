@@ -9,8 +9,6 @@ $(".text-amount").text(
 
 $("#selector-plan-monthly").click(function() {
   $("#list-selector-amount").show();
-  $("#input-amount").hide();
-  $("#input-amount input").val("");
   $("#input-amount .input-error").hide();
   $(".text-amount").text(
     $("input[name='item-selector-amount']:checked").data("amount")
@@ -19,16 +17,15 @@ $("#selector-plan-monthly").click(function() {
 });
 
 $("#selector-plan-once").click(function() {
-  $("#list-selector-amount").hide();
-  $("#selector-amount-5").click();
-  $("#input-amount").show();
-  $("#input-amount input").val("");
-  $("#input-amount .input-error").hide();
-  $(".text-amount").text("0");
+  $("#input-amount .input-error").hide(); 
+  $(".text-amount").text(
+    $("input[name='item-selector-amount']:checked").data("amount")
+  );
   $("#frequency").text("");
 });
 
 $("input[name='item-selector-amount']").click(function() {
+  $("#input-amount input").val("");
   $("#input-amount").hide();
   $(".text-amount").text($(this).data("amount"));
 });
