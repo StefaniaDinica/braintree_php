@@ -18,6 +18,17 @@
     .routes li button {
         padding: 10px;
     }
+
+    .my-account-wrapper {
+        /* text-align: center; */
+        margin-top: 50px;
+        padding: 30px;
+    }
+
+    .form-subscription {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 </style>
 
 <body>
@@ -113,8 +124,26 @@
 
 
 
-    <div id="myAccount-page">
-    
+    <div class="my-account-wrapper" id="myAccount-page">
+        <div class="form-subscription">
+            <div id="input-account-email" class="form-group">
+                <input id="account-email" placeholder="Type email" size="25"></input>
+                <span class="input-error">Please type an email</span>
+            </div>
+            <button id="find-subscription">Find subscriptions</button>
+        </div>
+        <h3 class="cancel-subscription-result"></h3>
+        <div id="loader-subscription" class="lds-default center hide">
+                <div></div><div></div><div></div>
+                <div></div><div></div><div></div>
+                <div></div><div></div><div></div>
+                <div></div><div></div><div></div>
+            </div>
+        <div class="subscriptions-wrapper">
+            <h3>Subscriptions</h3>
+            <ul id="subscription-list" class="subscriptions-list">
+            </ul>
+        </div>
     </div>
 
     <!-- Load the Drop-in component -->
@@ -130,10 +159,16 @@
     <script src="javascript/jquery.min.js"></script>
     <script src="javascript/donationForms.js"></script>
     <script src="javascript/payment.js"></script>
+    <script src="javascript/myAccount.js"></script>
+    
 
 <script>
     $("#donations-page").hide();
     $("#myAccount-page").hide();
+    $("#input-account-email .input-error").hide();
+    $(".subscriptions-wrapper").hide();
+    $(".cancel-subscription-result").hide();
+
 
     $("#donations-page-link").click(function() {
         $("#myAccount-page").hide();

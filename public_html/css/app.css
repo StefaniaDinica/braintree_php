@@ -203,3 +203,42 @@ button[type=submit] {
     transform: scale(1.5);
   }
 }
+
+.subscriptions-wrapper {
+  /* border: 1px solid black; */
+  margin-top: 50px;
+  padding: 30px 0px;
+}
+
+.subscriptions-list li {
+  display: block;
+  float: none;
+  padding: 30px;
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+
+.subscription-price {
+  display: block;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.subscription-details {
+  display: block;
+  font-size: 16px;
+  margin: 5px 0px;
+}
+
+.transactions-table {
+  margin: 20px 0px;
+}
+
+.transactions-table td {
+  padding: 10px;
+  border-top: 1px solid black;
+}
+
+.cancel-subscription-result {
+  text-align: center;
+}

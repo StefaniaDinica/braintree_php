@@ -18,11 +18,19 @@ try {
     error_log($errorString . " SubscriptionId: " . $subscriptionId);
 
     $cancelSubscriptionMessage = "A intervenit o problema. Contactati echipa de support.";
+    $success = false;
   } else {
-    $cancelSubscriptionMessage = "Ati fost dezabonat cu succes!";
+    $cancelSubscriptionMessage = "Ati fost dezabonat cu succes de la subscriptia selectata!";
+    $success = true;
   }
 } catch (Braintree_Exception_NotFound $e) {
   error_log("Subscription not found. SubscriptionId: " . $subscriptionId);
 
   $cancelSubscriptionMessage = "A intervenit o problema. Contactati echipa de support.";
+  $success = false;
 }
+
+echo json_encode([
+  'success' => $success,
+  'message' => $cancelSubscriptionMessage
+]);
