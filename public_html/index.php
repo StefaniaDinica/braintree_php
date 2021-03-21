@@ -3,34 +3,6 @@
 <html>
 <?php require_once("../includes/head.php"); ?>
 
-<style>
-    .routes-container {
-        text-align: center;
-    }
-    .routes li {
-        display: block;
-        float: none;
-        margin: 20px;
-        font-size: 24px;
-        cursor: pointer;
-    }
-
-    .routes li button {
-        padding: 10px;
-    }
-
-    .my-account-wrapper {
-        /* text-align: center; */
-        margin-top: 50px;
-        padding: 30px;
-    }
-
-    .form-subscription {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-</style>
-
 <body>
     <div class="routes-container">
         <ul class="routes">
@@ -39,7 +11,7 @@
         </ul>
     </div>
     <div id="donations-page">
-        <div class="wrapper">
+        <div class="donations-wrapper">
             <div id="donation-forms" class="checkout container">
                 <form id="form-selector">
                     <ul id="list-selector-plan">
@@ -125,24 +97,30 @@
 
 
     <div class="my-account-wrapper" id="myAccount-page">
-        <div class="form-subscription">
+        <div class="form-account-email">
             <div id="input-account-email" class="form-group">
-                <input id="account-email" placeholder="Type email" size="25"></input>
+                <input type="email" placeholder="Type email" size="25"></input>
                 <span class="input-error">Please type an email</span>
             </div>
-            <button id="find-subscription">Find subscriptions</button>
+            <button id="search-subscriptions">Find subscriptions</button>
         </div>
-        <h3 class="cancel-subscription-result"></h3>
+        <h3 id="result-message" class="result-message"></h3>
         <div id="loader-subscription" class="lds-default center hide">
-                <div></div><div></div><div></div>
-                <div></div><div></div><div></div>
-                <div></div><div></div><div></div>
-                <div></div><div></div><div></div>
-            </div>
-        <div class="subscriptions-wrapper">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+        </div>
+        <div id="subscriptions-wrapper" class="subscriptions-wrapper">
             <h3>Subscriptions</h3>
-            <ul id="subscription-list" class="subscriptions-list">
+            <ul id="subscriptions-list" class="subscriptions-list">
             </ul>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div id="modal-content" class="modal-content">
+            <span class="close">&times;</span>
         </div>
     </div>
 
@@ -157,27 +135,10 @@
     <!-- Captcha -->
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
     <script src="javascript/jquery.min.js"></script>
+    <script src="javascript/inits.js"></script>
     <script src="javascript/donationForms.js"></script>
     <script src="javascript/payment.js"></script>
     <script src="javascript/myAccount.js"></script>
-    
-
-<script>
-    $("#donations-page").hide();
-    $("#myAccount-page").hide();
-    $("#input-account-email .input-error").hide();
-    $(".subscriptions-wrapper").hide();
-    $(".cancel-subscription-result").hide();
-
-
-    $("#donations-page-link").click(function() {
-        $("#myAccount-page").hide();
-        $("#donations-page").show();
-    });
-    $("#myAccount-page-link").click(function() {
-        $("#donations-page").hide();
-        $("#myAccount-page").show();
-    });
-</script>
+    <script src="javascript/modal.js"></script>
 </body>
 </html>

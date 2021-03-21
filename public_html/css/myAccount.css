@@ -1,0 +1,63 @@
+.my-account-wrapper {
+  margin-top: 50px;
+  padding: 30px;
+}
+
+.form-account-email {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.subscriptions-wrapper {
+  margin-top: 50px;
+}
+
+.subscriptions-list li {
+  display: block;
+  float: none;
+  padding: 30px;
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+
+.subscriptions-list li button {
+  margin: 10px 0px;
+}
+
+.subscription-price {
+  display: block;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.subscription-details {
+  display: block;
+  font-size: 16px;
+  margin: 5px 0px;
+}
+
+.transactions-table {
+  margin: 20px 0px;
+}
+
+.transactions-table td {
+  padding: 10px;
+  border-top: 1px solid black;
+}
+
+.cancel-subscription-result {
+  text-align: center;
+}
+
+.hosted-field {
+  height: 50px;
+  width: fit-content;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0px 10px;
+  margin: 10px 0px;
+}
+
+.result-message {
+  text-align: center;
+}

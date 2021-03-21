@@ -19,7 +19,9 @@ foreach($customers as $customer) {
           "status" => $subscription->status,
           "createdAt" => $subscription->createdAt,
           "price" => $subscription->price,
-          "transactions" => $subscription->transactions
+          "transactions" => $subscription->transactions,
+          'paymentMethodToken' => $subscription->paymentMethodToken,
+          "cardMaskedNumber" => $creditCard->maskedNumber
         ];
       }
     }
