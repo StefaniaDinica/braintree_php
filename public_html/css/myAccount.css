@@ -45,8 +45,17 @@
   border-top: 1px solid black;
 }
 
-.cancel-subscription-result {
+.result-message {
   text-align: center;
+}
+
+/* Braintree Hosted Fields styling classes*/
+.braintree-hosted-fields-focused {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .hosted-field {
@@ -58,6 +67,18 @@
   margin: 10px 0px;
 }
 
-.result-message {
-  text-align: center;
+.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.invalid-feedback {
+  display: none;
+}
+
+.error-label {
+  display: none;
+  margin: 10px 0px;
+  color: #cc0000;
+  font-size: 14px;
 }

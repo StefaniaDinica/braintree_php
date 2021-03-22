@@ -3,7 +3,6 @@ $("#myAccount-page").hide();
 $("#input-account-email .input-error").hide();
 
 $("#subscriptions-wrapper").hide();
-$("#cancel-subscription-result").hide();
 
 $("#donations-page-link").click(function() {
     $("#myAccount-page").hide();

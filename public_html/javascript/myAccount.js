@@ -1,29 +1,43 @@
 $("#search-subscriptions").click(function() {
-  $("#subscriptions-wrapper").hide();
-  $("#loader-subscription").show();
-  $("#subscriptions-list").empty();
-  $("#result-message").empty();
-
   let email = $("#input-account-email input").val();
 
   if (email.length == 0) {
-      $("#input-account-email .input-error").show();
+    $("#input-account-email .input-error").show();
   } else {
-      $("#input-account-email .input-error").hide();
-      $("#loader-subscription").show();
+    $("#subscriptions-wrapper").hide();
+    $("#subscriptions-list").empty();
+    $("#result-message").empty();
+    $("#input-account-email .input-error").hide();
+    $("#loader-subscription").show();
 
-      searchSubscriptions(email);
+    searchSubscriptions(email);
   }
 });
 
 $(document).on('click', '#cancel-subscription', function(){ 
   var id = $(this).parent().attr('id');
 
-  if (confirm("Esti sigur ca vrei sa opresti subscription?")) {
-    cleanViewAndShowLoader();
+  setModalContent(
+    '<div>' + 
+      '<h3>Esti sigur ca vrei sa opresti subscriptia?</h3>' + 
+      '<button id="submit-cancel-subscription">Da</button>' +
+      '<button id="exit-cancel-modal">Nu</button>' +
+    '</div>'
+  );
 
+  openModal();
+
+  $("#submit-cancel-subscription").click(function() {
+    setModalContent("");
+    closeModal();
+    cleanViewAndShowLoader();
     cancelSubscription(id);
-  }
+  });
+
+  $("#exit-cancel-modal").click(function() {
+    setModalContent("");
+    closeModal();
+  });
 });
 
 $(document).on('submit', 'form[id^="form-update-price-"]', function() { 
@@ -81,23 +95,25 @@ var createHostedFields = function(response) {
         'input': {
           'font-size': '14px',
           'color': '#495057'
-        },
-        'input.invalid': {
-          // 'color': 'red'
-        },
-        'input.valid': {
-          // 'color': 'green'
         }
       },
       fields: {
+        cardholderName: {
+          selector: '#cc-name',
+          placeholder: 'Name as it appears on your card'
+        },
         number: {
-          selector: '#card-number',
+          selector: '#cc-number',
           placeholder: '4111 1111 1111 1111'
         },
         expirationDate: {
-          selector: '#expiration-date',
+          selector: '#cc-expiration',
           placeholder: '10/2022'
-        }
+        },
+        cvv: {
+          selector: '#cc-cvv',
+          placeholder: '123'
+        },
       }
     }, function (hostedFieldsErr, hostedFieldsInstance) {
       if (hostedFieldsErr) {
@@ -105,14 +121,45 @@ var createHostedFields = function(response) {
         return;
       }
 
-      // submit.removeAttribute('disabled');
+      hostedFieldsInstance.on('validityChange', function(event) {
+        var field = event.fields[event.emittedBy];
+  
+        // Remove any previously applied error or warning classes
+        $(field.container).removeClass('is-valid');
+        $(field.container).removeClass('is-invalid');
+  
+        if (field.isValid) {
+          $(field.container).addClass('is-valid');
+        } else if (field.isPotentiallyValid) {
+          // skip adding classes if the field is
+          // not valid, but is potentially valid
+        } else {
+          $(field.container).addClass('is-invalid');
+        }
+      });
 
       $(document).on('submit', 'form[id^="update-payment-form-"]', function(){ 
         event.preventDefault();
 
-        closeModal();
-        setModalContent("");
+        var formIsInvalid = false;
+        var state = hostedFieldsInstance.getState();
 
+        Object.keys(state.fields).forEach(function(field) {
+          if (!state.fields[field].isValid) {
+            $(state.fields[field].container).addClass('is-invalid');
+            formIsInvalid = true;
+            $('#error-' + state.fields[field].container.id).show();
+          } else {
+            $('#error-' + state.fields[field].container.id).hide();
+          }
+        });
+  
+        if (formIsInvalid) {
+          // skip tokenization request if any fields are invalid
+          return;
+        }
+
+        closeModal();
         cleanViewAndShowLoader();
 
         var id = $(this).attr('id').replace("update-payment-form-", "");
@@ -127,14 +174,25 @@ var processClientToken  = function(response) {
     var id = $(this).parent().attr('id');
 
     setModalContent(
-      '<form action="/" id="update-payment-form-' + id + '" method="post">' + 
-        '<label for="card-number">Card Number</label>' + 
-        '<div class="hosted-field" id="card-number"></div>' +
-        '<label for="expiration-date">Expiration Date</label>' +
-        '<div class="hosted-field" id="expiration-date"></div>' +
+      '<div class="bootstrap-basic">' + 
+      '<form class="needs-validation" novalidate="" action="/" id="update-payment-form-' + id + '" method="post">' + 
+        '<label for="cc-name">Cardholder Name</label>' + 
+        '<div class="hosted-field" id="cc-name"></div>' +
+        '<div id="error-cc-name" class="error-label">Cardholder name is</div>' + 
+        '<label for="cc-number">Card Number</label>' + 
+        '<div class="hosted-field" id="cc-number"></div>' +
+        '<div id="error-cc-number" class="error-label">Card number is invalid</div>' + 
+        '<label for="cc-expiration">Expiration Date</label>' +
+        '<div class="hosted-field" id="cc-expiration"></div>' +
+        '<div id="error-cc-expiration" class="error-label">Expiration date is invalid</div>' + 
+        '<label for="cc-cvv">CVV</label>' +
+        '<div class="hosted-field" id="cc-cvv"></div>' +
+        '<div id="error-cc-cvv" class="error-label">CVV is invalid</div>' + 
         '<input type="submit" value="Update card" />' +
-      '</form>'
+      '</form>' +
+      '</div>'
     );
+
 
     createHostedFields(response);
     openModal();
@@ -242,6 +300,9 @@ var tokenizeHostedFieldsAndUpdatePaymentMethod = function(hostedFieldsInstance, 
       console.error(tokenizeErr);
       return;
     }
+
+    /* Clear modal content after tokenizing. Do not remove from here! */
+    setModalContent("");
 
     updatePaymentMethod(payload.nonce, paymentMethodToken);
   });
