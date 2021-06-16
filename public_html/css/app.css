@@ -4,7 +4,7 @@ body {
   font-family: Montserrat;
 }
 
-.wrapper {
+.donations-wrapper {
   width: 100%;
   overflow: auto;
   z-index: 0;
@@ -72,7 +72,7 @@ input[type=radio]:checked ~ label {
   font-weight: 700;
 }
 
-input[type=number], input[type=text] {
+.donations-wrapper input[type=number], input[type=text] {
   width: 300px;
   padding: 6px 22px;
   border: 1px solid #cc0000;
@@ -202,4 +202,19 @@ button[type=submit] {
   50% {
     transform: scale(1.5);
   }
+}
+
+.routes-container {
+  text-align: center;
+}
+.routes li {
+  display: block;
+  float: none;
+  margin: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.routes li button {
+  padding: 10px;
 }

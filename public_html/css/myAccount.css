@@ -1,0 +1,84 @@
+.my-account-wrapper {
+  margin-top: 50px;
+  padding: 30px;
+}
+
+.form-account-email {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.subscriptions-wrapper {
+  margin-top: 50px;
+}
+
+.subscriptions-list li {
+  display: block;
+  float: none;
+  padding: 30px;
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+
+.subscriptions-list li button {
+  margin: 10px 0px;
+}
+
+.subscription-price {
+  display: block;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.subscription-details {
+  display: block;
+  font-size: 16px;
+  margin: 5px 0px;
+}
+
+.transactions-table {
+  margin: 20px 0px;
+}
+
+.transactions-table td {
+  padding: 10px;
+  border-top: 1px solid black;
+}
+
+.result-message {
+  text-align: center;
+}
+
+/* Braintree Hosted Fields styling classes*/
+.braintree-hosted-fields-focused {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.hosted-field {
+  height: 50px;
+  width: fit-content;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0px 10px;
+  margin: 10px 0px;
+}
+
+.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.invalid-feedback {
+  display: none;
+}
+
+.error-label {
+  display: none;
+  margin: 10px 0px;
+  color: #cc0000;
+  font-size: 14px;
+}

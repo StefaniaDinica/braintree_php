@@ -1,7 +1,7 @@
 {
   "require" : {
     "braintree/braintree_php" : "5.4.0",
-    "php": "7.4.13",
+    "php": "7.4.16",
     "vlucas/phpdotenv": "2.1.0",
     "swiftmailer/swiftmailer": "^6.0"
   },
