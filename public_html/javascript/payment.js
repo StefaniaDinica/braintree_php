@@ -148,6 +148,11 @@ var processClientToken = function(response) {
           {
             authorization: response.token,
             selector: "#bt-dropin-recurr",
+            card: {
+              cardholderName: {
+                required: true
+									}
+								},
             paypal: {
               flow: "vault"
             }
@@ -159,6 +164,11 @@ var processClientToken = function(response) {
             {
               authorization: response.token,
               selector: "#bt-dropin-simple",
+              card: {
+              cardholderName: {
+                required: true
+									}
+								},
               paypal: {
                 flow: "vault"
               },
