@@ -125,13 +125,14 @@
     </div>
 
     <!-- Load the Drop-in component -->
-    <script src='https://js.braintreegateway.com/web/dropin/1.25.0/js/dropin.min.js'></script>
-    <script src="https://js.braintreegateway.com/web/3.70.0/js/client.min.js"></script>
-    <script src="https://js.braintreegateway.com/web/3.70.0/js/data-collector.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/dropin/1.30.1/js/dropin.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.78.3/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.78.3/js/data-collector.min.js"></script>
     <!-- Load the 3D Secure component. -->
-    <script src='https://js.braintreegateway.com/web/3.70.0/js/three-d-secure.min.js'></script>
+    <script src='https://js.braintreegateway.com/web/3.78.3/js/three-d-secure.min.js'></script>
     <!-- Load the Hosted Fields component. -->
-    <script src='https://js.braintreegateway.com/web/3.70.0/js/hosted-fields.min.js'></script>
+    <script src='https://js.braintreegateway.com/web/3.78.3/js/hosted-fields.min.js'></script>
+    
     <!-- Captcha -->
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
     <script src="javascript/jquery.min.js"></script>
