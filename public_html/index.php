@@ -8,6 +8,7 @@
         <ul class="routes">
             <li><button id="donations-page-link">Go to Donations Page</button></li>
             <li><button id="myAccount-page-link">Go to MyAccount Page</button></li>
+            <li><button id="generate-document">Generate Document</button></li>
         </ul>
     </div>
     <div id="donations-page">
