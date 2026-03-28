@@ -8,7 +8,7 @@
     "twbs/bootstrap": "^5.1"
   },
   "require-dev": {
-    "phpunit/phpunit": "5.*",
+    "phpunit/phpunit": "8.*",
     "ext-curl": "*"
   }
 }
